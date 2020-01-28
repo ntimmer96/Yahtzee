@@ -66,9 +66,7 @@ def diceRoll():
                     save = input("Enter a die you would like to save: ")
                     savedDie.append(save)
                     keep -= 1
-                
         print()
-
         count += 1
     diceValues.append(d1)
     diceValues.append(d2)
