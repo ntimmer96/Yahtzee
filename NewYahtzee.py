@@ -62,7 +62,6 @@ class Roll:
             else:
                 print("Not a valild scoring position. Please enter a valid option from the list above.")
     
-    def 
 
  
 class Scoring:
