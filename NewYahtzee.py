@@ -39,15 +39,16 @@ class Roll:
     
     def playersTurn(self):
         count = 1
-        while self.player.rollsRemaining != 0:
+        playerRollsRemaining = self.player.rollsRemaining
+        while playerRollsRemaining != 0:
             print("--- Roll " + str(count) + " ---")
-            if self.player.rollsRemaining == 3:
+            if playerRollsRemaining == 3:
                 self.roll_dice()
             else:
                 keptDice = list(map(int, input("Enter the dice you would like to keep seperated by space: ").split()))
                 self.roll_dice(keptDice)
             count += 1
-        self.player.rollsRemaining = 3
+        playerRollsRemaining = 3
         count = 1
 
         print("Which category would you like to score on?")
@@ -78,14 +79,17 @@ class Scoring:
     def lowerSectionTotal(self):
         pass
 
-    def upperSectionScoring(self, number, scoreCardValue):
+    def upperSectionScoring(self, scoreCardValue):
         dice = self.player.currentRoll
         scoreCard = self.player.scoreCard
+        selectedScoring = {"one" : 1, "two" : 2, "three" : 3, "four" : 4, "five" : 5, "six" : 6}
         points = 0
+        print("value = " + str(selectedScoring[scoreCardValue]))
         for die in dice:
-            if die == number:
+            if die == selectedScoring[scoreCardValue]:
                 points += die
         scoreCard[scoreCardValue] = points
+        print(points)
 
 
 
@@ -123,6 +127,13 @@ if len(players) > 1:
 
 # Loop that will run through each players turn and the actions they will take
 for i in range(len(players)):
-    roll = Roll(players[i])
     scoring = Scoring(players[i])
-    roll.playersTurn()
+    players[i].currentRoll = [1, 5, 2, 5, 5]
+    scoring.upperSectionScoring("five")
+    scoring.upperSectionScoring("one")
+    print("Five = " + str(players[i].scoreCard["five"]))
+    print("One = " + str(players[i].scoreCard["one"]))
+    print("total = " + str(players[i].scoreCard["five"]) + str(players[i].scoreCard["three"]))
+    #roll = Roll(players[i])
+    #scoring = Scoring(players[i])
+    #roll.playersTurn()
